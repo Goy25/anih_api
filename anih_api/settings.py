@@ -28,7 +28,11 @@ SECRET_KEY = os.environ.get('SECRET_KEY', default='django-insecure-p#bnj2mzgjolq
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = 'RENDER' not in os.environ
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = []
+
+RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+if RENDER_EXTERNAL_HOSTNAME:
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
 # Application definition
 
@@ -92,11 +96,8 @@ WSGI_APPLICATION = 'anih_api.wsgi.application'
 # }
 
 DATABASES = {
-    'default': dj_database_url.config()
+    'default': dj_database_url.config(default='postgresql://postgres:postgres@localhost/postgres')
 }
-
-MEDIA_URL = '/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'recintos')
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
