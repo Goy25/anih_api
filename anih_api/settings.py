@@ -96,7 +96,11 @@ WSGI_APPLICATION = 'anih_api.wsgi.application'
 # }
 
 DATABASES = {
-    'default': dj_database_url.config(default='postgresql://postgres:postgres@localhost/postgres')
+    'default': dj_database_url.config(
+        # Feel free to alter this value to suit your needs.
+        default='postgresql://postgres:postgres@localhost:5432/mysite',
+        conn_max_age=600
+    )
 }
 
 # Password validation
@@ -134,19 +138,14 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+if not DEBUG:
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CORS_ALLOW_ALL_ORIGINS = True
-
 REST_FRAMEWORK = {
   'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema'
 }
-
-STATIC_URL = '/static/'
-
-if not DEBUG:
-    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
