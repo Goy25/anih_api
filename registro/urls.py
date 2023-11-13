@@ -6,6 +6,9 @@ from registro import views
 router = routers.DefaultRouter()
 router.register("usuario", views.UsuarioView, "usuario")
 router.register("log", views.LogView, "log")
+router.register("rol", views.RolView, "rol")
+router.register("contacto", views.ContactoView, "contacto")
+router.register("tiene", views.TieneView, "tiene")
 
 urlpatterns = [
   path("anih/", include(router.urls)),

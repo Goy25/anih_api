@@ -1,5 +1,4 @@
 from django.db import models
-from registro.models import Usuario
 
 # Create your models here.
 

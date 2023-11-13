@@ -3,8 +3,8 @@ from rest_framework import viewsets
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from .serializer import UsuarioSerializer, ContactoSerializer, LogSerializer
-from .models import Usuario, Log, Contacto, Tiene
+from .serializer import UsuarioSerializer, ContactoSerializer, LogSerializer, RolSerializer, TieneSerializer
+from .models import Usuario, Log, Contacto, Tiene, Rol
 import random
 import string
 import smtplib
@@ -31,6 +31,21 @@ class UsuarioView(viewsets.ModelViewSet):
 class LogView(viewsets.ModelViewSet):
   serializer_class = LogSerializer
   queryset = Log.objects.all()
+
+
+class RolView(viewsets.ModelViewSet):
+  serializer_class = RolSerializer
+  queryset = Rol.objects.all()
+
+
+class ContactoView(viewsets.ModelViewSet):
+  serializer_class = ContactoSerializer
+  queryset = Contacto.objects.all()
+
+
+class TieneView(viewsets.ModelViewSet):
+  serializer_class = TieneSerializer
+  queryset = Tiene.objects.all()
 
 
 class ActualizarUsuario(APIView):
